@@ -9,7 +9,7 @@ import boto3
 
 from .token import get_headers, get_credentials
 
-from typing import Dict, List, Optional
+from typing import cast, Dict, List, Optional
 
 
 def get_collections() -> List[Dict]:
@@ -20,9 +20,11 @@ def get_collections() -> List[Dict]:
     return h["collections"]
 
 
-def get_download_url(asset_dict: Dict) -> str:
+def get_download_url(asset_dict: Dict) -> Optional[str]:
+    url = asset_dict.get("href")
+    assert url is not None, "asset_dict requires a href value"
     r = requests.get(
-        asset_dict.get("href"), headers=get_headers(), allow_redirects=False
+        cast(str, asset_dict.get("href")), headers=get_headers(), allow_redirects=False
     )
     return r.headers.get("Location")
 
@@ -43,11 +45,12 @@ def download_file(url: str, download_path: Path = Path(".")) -> None:
         print(f"{savepath} already exists! Skipping")
 
 
-def download_s3_file(
-    url: str, download_path: Path = Path(".")) -> None:
+def download_s3_file(url: str, download_path: Path = Path(".")) -> None:
 
     access_key, secret_key = get_credentials()
     parsed_url = urlparse(url)
+
+    assert isinstance(parsed_url, str)
 
     bucket = parsed_url.hostname.split(".")[0]
     path = parsed_url.path[1:]
@@ -86,7 +89,7 @@ def get_all_assets(
 
     r = requests.get(
         f"https://api.radiant.earth/mlhub/v1/collections/{collection_id}/items",
-        params={"limit": limit, "bbox": bounding_box, "datetime": date_time},
+        params={"limit": limit, "bbox": bounding_box, "datetime": date_time},  # type: ignore
         headers=get_headers(),
     )
     collection = r.json()
