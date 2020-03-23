@@ -20,7 +20,7 @@ KENYA_02_SRC = "ref_african_crops_kenya_02_source"
 def download_collection(
     collection_id: str,
     download_path: Path,
-    image_band: Optional[str] = "b03",
+    image_band: Optional[str] = None,
     ignore_source_images: bool = False,
 ) -> None:
 
@@ -53,7 +53,7 @@ def get_date(filename: str) -> str:
 def download_all_assets(
     collection_id: str,
     download_path: Path,
-    image_band: Optional[str] = "b03",
+    image_band: Optional[str] = None,
     ignore_source_images: bool = False,
 ) -> None:
 
@@ -87,7 +87,8 @@ def download_all_assets(
                 if date_string == "20190924":
                     url = get_download_url(asset_dict)
                     if url is not None:
-                        download_s3_file(url=url, download_path=date_folder)
+                        pass
+                        # download_s3_file(url=url, download_path=date_folder)
                     else:
                         print("No url returned! No file being downloaded")
 
