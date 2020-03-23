@@ -3,11 +3,12 @@ channels:
   - conda-forge
 dependencies:
   - python=3.7
-  - boto3
+  - pip
   - jupyter
   - requests
   - xarray
   - rasterio  # to read tif and jp2 files
   - black  # formatting
   - mypy  # type checking
-  - pandas
+  - pip:
+    - -e .

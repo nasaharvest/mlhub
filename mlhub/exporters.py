@@ -2,7 +2,7 @@ from pathlib import Path
 import datetime
 import re
 
-from src.utils import (
+from .utils import (
     get_all_assets,
     download_file,
     get_download_url,

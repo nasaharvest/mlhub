@@ -10,6 +10,5 @@ __all__ = [
     "get_collections",
     "set_aws_credentials",
     "download_collections",
-    "features_to_df"
-    "check_dates_across_features"
+    "features_to_df" "check_dates_across_features",
 ]
