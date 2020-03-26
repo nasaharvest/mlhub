@@ -84,12 +84,11 @@ def download_all_assets(
                 date_string = get_date(asset_key)
                 date_folder = feature_folder / date_string
                 date_folder.mkdir(exist_ok=True)
-                if date_string == "20190924":
-                    url = get_download_url(asset_dict)
-                    if url is not None:
-                        download_s3_file(url=url, download_path=date_folder)
-                    else:
-                        print("No url returned! No file being downloaded")
+                url = get_download_url(asset_dict)
+                if url is not None:
+                    download_s3_file(url=url, download_path=date_folder)
+                else:
+                    print("No url returned! No file being downloaded")
 
 
 def get_tile_and_date(

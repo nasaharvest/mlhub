@@ -50,8 +50,7 @@ def download_s3_file(url: str, download_path: Path = Path(".")) -> None:
     access_key, secret_key = get_credentials()
     parsed_url = urlparse(url)
 
-    assert isinstance(parsed_url, str)
-
+    assert isinstance(parsed_url.hostname, str)
     bucket = parsed_url.hostname.split(".")[0]
     path = parsed_url.path[1:]
     filename = path.split("/")[-1]
