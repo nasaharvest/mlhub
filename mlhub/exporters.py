@@ -87,8 +87,7 @@ def download_all_assets(
                 if date_string == "20190924":
                     url = get_download_url(asset_dict)
                     if url is not None:
-                        pass
-                        # download_s3_file(url=url, download_path=date_folder)
+                        download_s3_file(url=url, download_path=date_folder)
                     else:
                         print("No url returned! No file being downloaded")
 

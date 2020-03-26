@@ -103,9 +103,9 @@ def plot_range(dates_df: pd.DataFrame) -> None:
 
     sorted_df = dates_df.sort_index()
 
-    plt.clf()
+    plt.clf()  # type: ignore
 
-    fig = plt.figure()
+    fig = plt.figure()  # type: ignore
     ax = fig.add_subplot(111)
 
     green = np.array([[0, 255, 0]])
@@ -126,4 +126,4 @@ def plot_range(dates_df: pd.DataFrame) -> None:
             label.set_visible(False)
     fig.autofmt_xdate()
 
-    plt.show()
+    plt.show()  # type: ignore
